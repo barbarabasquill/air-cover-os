@@ -1,0 +1,415 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<meta name="theme-color" content="#0b1430">
+<meta name="description" content="Air Cover/OS builds Air Cover, the weekly update from marketing to sales, powered by Claude.">
+<title>Air Cover/OS | Weekly Marketing-to-Sales Command Center</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Archivo:wdth,wght@75..125,400..800&display=swap" rel="stylesheet">
+<style>
+:root{
+  --navy:#0b1430; --navy-2:#13204a; --navy-3:#1d2d61;
+  --sky:#9fb3e0; --amber:#ffb21c; --amber-ink:#8a5a00;
+  --paper:#f4f6fb; --card:#ffffff; --ink:#1a2238; --muted:#566184; --line:#dfe5f1;
+  --ok:#1f7a4d;
+  --font:"Archivo",system-ui,-apple-system,"Segoe UI",Roboto,sans-serif;
+  color-scheme:light;
+  box-sizing:border-box;
+  padding-top:env(safe-area-inset-top,0px);padding-bottom:env(safe-area-inset-bottom,0px);
+}
+@media (prefers-color-scheme:dark){:root:not([data-theme="light"]){
+  --paper:#0e1530;--card:#151f42;--ink:#e8edf9;--muted:#a3afd0;--line:#26346a;--amber-ink:#ffc65c;color-scheme:dark;}}
+:root[data-theme="dark"]{--paper:#0e1530;--card:#151f42;--ink:#e8edf9;--muted:#a3afd0;--line:#26346a;--amber-ink:#ffc65c;color-scheme:dark;}
+*,*::before,*::after{box-sizing:inherit}
+html{scroll-padding-top:calc(env(safe-area-inset-top,0px) + 16px);scroll-behavior:smooth}
+@media (prefers-reduced-motion:reduce){html{scroll-behavior:auto}}
+body{margin:0;background:var(--paper);color:var(--ink);font:400 16px/1.55 var(--font)}
+a{color:inherit}
+:focus-visible{outline:3px solid var(--amber);outline-offset:2px;border-radius:4px}
+.app{display:grid;grid-template-columns:260px 1fr;min-height:100vh}
+
+/* Sidebar */
+.side{background:var(--navy);color:#dfe6f7;padding:24px 18px;position:sticky;top:0;height:100vh;overflow:auto}
+.brand{display:flex;gap:12px;align-items:center;text-decoration:none;margin-bottom:28px}
+.mark{width:40px;height:40px;border-radius:10px;background:var(--amber);display:grid;place-items:center;flex:none}
+.mark svg{width:24px;height:24px}
+.brand b{display:block;font-weight:800;font-stretch:115%;letter-spacing:.02em;color:#fff;font-size:17px}
+.brand small{display:block;color:var(--sky);font-size:12.5px}
+.side h2{font-size:12.5px;color:var(--sky);font-weight:600;margin:20px 8px 8px}
+.side nav a{display:flex;gap:10px;align-items:center;padding:8px 10px;border-radius:8px;text-decoration:none;font-size:14.5px;color:#dfe6f7}
+.side nav a:hover{background:var(--navy-2)}
+.side nav a.on{background:var(--navy-3);color:#fff}
+.side nav .n{font-variant-numeric:tabular-nums;color:var(--amber);width:18px;font-weight:700;font-size:13px}
+.private{margin-top:26px;padding:14px;border:1px solid var(--navy-3);border-radius:10px;font-size:13px;color:var(--sky)}
+.private b{color:#fff;display:block;margin-bottom:2px}
+
+/* Main */
+main{padding:32px clamp(18px,4vw,48px) 80px;max-width:1180px}
+.hero{background:var(--navy);color:#fff;border-radius:16px;padding:clamp(24px,4vw,44px);position:relative;overflow:hidden}
+.hero .runway{position:absolute;right:-40px;bottom:-30px;width:340px;opacity:.9;pointer-events:none}
+.hero p.kicker{margin:0 0 10px;color:var(--amber);font-weight:600}
+.hero h1{margin:0;font-size:clamp(34px,5vw,58px);line-height:1.02;font-weight:800;font-stretch:118%;max-width:12ch}
+.hero .sub{margin:14px 0 22px;color:#c9d4ee;max-width:52ch;font-size:17px}
+.hero-stats{display:flex;flex-wrap:wrap;gap:10px;position:relative}
+.chip{background:var(--navy-2);border:1px solid var(--navy-3);border-radius:999px;padding:7px 14px;font-size:13.5px;color:#dfe6f7}
+.chip b{color:#fff}
+.btn{display:inline-flex;align-items:center;gap:8px;border:0;border-radius:10px;padding:11px 18px;font:600 15px var(--font);cursor:pointer;text-decoration:none}
+.btn-amber{background:var(--amber);color:#1a1300}
+.btn-ghost{background:transparent;color:var(--ink);border:1px solid var(--line)}
+.btn-navy{background:var(--navy);color:#fff}
+.hero .btn{margin-top:22px}
+
+section.card{background:var(--card);border:1px solid var(--line);border-radius:14px;padding:clamp(20px,3vw,30px);margin-top:22px}
+.card header{display:flex;gap:16px;align-items:flex-start;margin-bottom:18px}
+.num{flex:none;width:44px;height:44px;border-radius:10px;background:var(--navy);color:var(--amber);display:grid;place-items:center;font-weight:800;font-size:18px;font-stretch:115%}
+.card h2{margin:0;font-size:22px;line-height:1.2;font-weight:750;font-stretch:108%}
+.card header p{margin:4px 0 0;color:var(--muted);max-width:62ch;font-size:15px}
+.auto{font-size:12.5px;font-weight:600;color:var(--amber-ink);background:color-mix(in srgb,var(--amber) 18%,transparent);padding:3px 9px;border-radius:999px;margin-left:8px;white-space:nowrap;vertical-align:middle}
+
+.grid{display:grid;gap:14px;grid-template-columns:repeat(auto-fit,minmax(200px,1fr))}
+label{display:block;font-size:13.5px;font-weight:600;margin-bottom:5px}
+label .opt{font-weight:400;color:var(--muted)}
+input,select,textarea{width:100%;font:15px var(--font);color:var(--ink);background:var(--paper);border:1px solid var(--line);border-radius:9px;padding:10px 12px}
+textarea{min-height:76px;resize:vertical}
+.full{grid-column:1/-1}
+.row{display:grid;gap:10px;grid-template-columns:1.2fr 1fr 1fr 1.4fr auto;align-items:end;padding:12px;border:1px dashed var(--line);border-radius:10px;margin-bottom:10px}
+.row.launch{grid-template-columns:1.3fr .9fr .9fr 1fr 1.3fr auto}
+.x{background:none;border:1px solid var(--line);color:var(--muted);border-radius:8px;width:40px;height:42px;cursor:pointer;font-size:18px}
+.add{margin-top:4px}
+.empty{color:var(--muted);font-size:14.5px;margin:0 0 10px}
+.grid>div{position:relative}
+.tip{display:inline-grid;place-items:center;width:17px;height:17px;margin-left:6px;border-radius:50%;border:1.5px solid var(--muted);background:none;color:var(--muted);font:700 11px/1 Georgia,serif;font-style:italic;cursor:help;padding:0;vertical-align:1px}
+.tip:hover,.tip[aria-expanded="true"]{background:var(--amber);border-color:var(--amber);color:#1a1300}
+.tipbox{display:none;position:absolute;z-index:20;left:0;right:0;min-width:240px;top:calc(100% + 6px);background:var(--navy);color:#eef2fb;font-size:13px;line-height:1.45;padding:10px 12px;border-radius:9px;box-shadow:0 8px 24px rgba(11,20,48,.25);max-width:340px}
+.tipbox::before{content:"";position:absolute;top:-6px;left:16px;border:6px solid transparent;border-top:0;border-bottom-color:var(--navy)}
+div:has(> label .tip:hover)>.tipbox,div:has(> label .tip:focus-visible)>.tipbox,div:has(> label .tip[aria-expanded="true"])>.tipbox{display:block}
+@media (prefers-color-scheme:dark){.tipbox{background:#24346f}.tipbox::before{border-bottom-color:#24346f}}
+.legend{font-size:13.5px;color:var(--muted);margin:0 0 12px;max-width:72ch}
+.hint{font-size:13.5px;color:var(--muted);margin:10px 0 0}
+
+/* Build */
+.build{display:grid;grid-template-columns:1fr 1fr;gap:18px}
+.panel{border:1px solid var(--line);border-radius:12px;overflow:hidden;display:flex;flex-direction:column;min-width:0}
+.panel h3{margin:0;padding:12px 16px;font-size:14.5px;background:var(--paper);border-bottom:1px solid var(--line);display:flex;justify-content:space-between;gap:10px;align-items:center}
+pre#brief{margin:0;padding:16px;white-space:pre-wrap;font:13px/1.55 ui-monospace,SFMono-Regular,Menlo,monospace;max-height:620px;overflow:auto;flex:1}
+.actions{display:flex;flex-wrap:wrap;gap:10px;margin-top:16px}
+.status{font-size:13.5px;color:var(--ok);min-height:20px;margin-top:8px}
+
+/* Email preview */
+.mail{background:#eef1f7;padding:14px;max-height:620px;overflow:auto;flex:1}
+.mail-in{background:#fff;color:#1a2238;border-radius:10px;overflow:hidden;font-family:Arial,Helvetica,sans-serif}
+.mail-head{background:#0b1430;padding:20px 22px}
+.mail-head .w{margin:0;font-size:12px;color:#9fb3e0}
+.mail-head .t{margin:4px 0 2px;font-size:26px;font-weight:bold;color:#fff}
+.mail-head .s{margin:0;color:#ffc65c;font-size:14px}
+.mail-head .c{margin:10px 0 0;font-size:12px;color:#c9d4ee}
+.mail-sec{padding:14px 22px 4px}
+.mail-sec h4{margin:0 0 6px;color:#0b1430;font-size:15px}
+.mail-sec p{margin:0 0 6px;font-size:13.5px;line-height:1.5}
+.ph{color:#8a5a00;background:#fff4dc;padding:0 4px;border-radius:3px;font-style:italic}
+.mail-q{font-family:Georgia,serif;font-size:16px;color:#0b1430}
+.mail-foot{background:#f3f6fc;padding:12px 22px;font-size:11.5px;color:#4a5677;margin-top:10px}
+
+.foot{margin-top:30px;color:var(--muted);font-size:13.5px;display:flex;flex-wrap:wrap;gap:12px;justify-content:space-between}
+
+@media (max-width:980px){
+  .app{grid-template-columns:1fr}
+  .side{position:sticky;top:0;height:auto;padding:10px 12px;z-index:10}
+  .side .brand{margin:0 0 6px}
+  .side h2,.private{display:none}
+  .side nav{display:flex;overflow-x:auto;gap:4px}
+  .side nav a{white-space:nowrap;font-size:13.5px}
+  body::before{content:"";position:fixed;inset:0 0 auto;height:env(safe-area-inset-top,0px);z-index:11;background:var(--navy)}
+  .build{grid-template-columns:1fr}
+  .row,.row.launch{grid-template-columns:1fr}
+  .x{width:100%}
+  .hero .runway{display:none}
+}
+</style>
+</head>
+<body>
+<div class="app">
+<aside class="side" aria-label="Air Cover/OS navigation">
+  <a class="brand" href="#overview">
+    <span class="mark" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="#0b1430" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M2 16l20-8-7 13-3-6-6-1z"/><path d="M12 15l3-3"/></svg></span>
+    <span><b>AIR COVER/OS</b><small>Marketing-to-sales command center</small></span>
+  </a>
+  <nav id="nav">
+    <h2>Workspace</h2>
+    <a href="#overview"><span class="n">◎</span>Overview</a>
+    <a href="#setup"><span class="n">⚙</span>Setup</a>
+    <h2>This week’s sections</h2>
+    <a href="#pipeline"><span class="n">2</span>Pipeline Pulse</a>
+    <a href="#accounts"><span class="n">3</span>Accounts to Work</a>
+    <a href="#speed"><span class="n">4</span>Speed-to-Lead</a>
+    <a href="#launching"><span class="n">5</span>What’s Launching</a>
+    <a href="#play"><span class="n">6</span>Try This Week</a>
+    <a href="#spotlight"><span class="n">7</span>Spotlight</a>
+    <a href="#wrapup"><span class="n">8</span>Wrap Up</a>
+    <h2>Send</h2>
+    <a href="#build"><span class="n">✈</span>Build Air Cover</a>
+  </nav>
+  <div class="private"><b>Private by design</b>Your inputs stay in this browser. Claude builds and sends from your own account.</div>
+</aside>
+
+<main>
+<section class="hero" id="overview" aria-labelledby="hero-title">
+  <svg class="runway" viewBox="0 0 340 220" aria-hidden="true"><g fill="none" stroke="#ffb21c" stroke-width="2"><path d="M60 220L170 40 280 220" opacity=".35"/><path d="M170 220V60" stroke-dasharray="10 12" opacity=".8"/><path d="M110 220l50-110M230 220l-50-110" opacity=".2"/></g><path d="M150 52l40-16-14 26-6-12z" fill="#ffb21c"/></svg>
+  <p class="kicker">Air Cover | Week of <span id="heroWeek">—</span></p>
+  <h1 id="hero-title">Weekly intel from marketing to help you win.</h1>
+  <p class="sub">Fill in what you have this week. Every field is optional. Claude writes the summary, what to say to each account, and ready-to-send messages, then builds the email for your sales team.</p>
+  <div class="hero-stats" aria-live="polite">
+    <span class="chip"><b id="sCount">0</b> of 7 sections ready</span>
+    <span class="chip"><b id="aCount">0</b> accounts to work</span>
+    <span class="chip"><b id="lCount">0</b> launches</span>
+  </div>
+  <a class="btn btn-amber" href="#build">Build this week’s Air Cover</a>
+</section>
+
+<section class="card" id="setup" aria-labelledby="setup-h">
+  <header><span class="num" aria-hidden="true">⚙</span><div><h2 id="setup-h">Setup</h2><p>Saved once and reused every week. For metric definitions, approved proof and send mode, fill in <code>air-cover-context.md</code> in your Claude Project.</p></div></header>
+  <div class="grid">
+    <div><label for="weekOf">Week of<button type="button" class="tip" aria-label="What is this?" aria-describedby="h-weekOf" aria-expanded="false">i</button></label><input id="weekOf" aria-describedby="h-weekOf" data-k="weekOf" placeholder="Oct 26"><span class="tipbox" role="tooltip" id="h-weekOf">The Monday this email goes out. It fills in the subject line.</span></div>
+    <div><label for="senderName">Your name<button type="button" class="tip" aria-label="What is this?" aria-describedby="h-senderName" aria-expanded="false">i</button></label><input id="senderName" aria-describedby="h-senderName" data-k="senderName" data-setup placeholder="Barbara Basquill"><span class="tipbox" role="tooltip" id="h-senderName">Shown at the bottom of the email as the sender.</span></div>
+    <div><label for="senderRole">Your role<button type="button" class="tip" aria-label="What is this?" aria-describedby="h-senderRole" aria-expanded="false">i</button></label><input id="senderRole" aria-describedby="h-senderRole" data-k="senderRole" data-setup placeholder="Principal Campaign Manager"><span class="tipbox" role="tooltip" id="h-senderRole">Your job title, shown next to your name.</span></div>
+    <div><label for="company">Company<button type="button" class="tip" aria-label="What is this?" aria-describedby="h-company" aria-expanded="false">i</button></label><input id="company" aria-describedby="h-company" data-k="company" data-setup><span class="tipbox" role="tooltip" id="h-company">Your company, so Claude writes for the right business.</span></div>
+    <div><label for="product">Product or solution<button type="button" class="tip" aria-label="What is this?" aria-describedby="h-product" aria-expanded="false">i</button></label><input id="product" aria-describedby="h-product" data-k="product" data-setup><span class="tipbox" role="tooltip" id="h-product">What sales is selling. Claude uses it to write what reps should say.</span></div>
+    <div><label for="audience">Audience<button type="button" class="tip" aria-label="What is this?" aria-describedby="h-audience" aria-expanded="false">i</button></label><select id="audience" aria-describedby="h-audience" data-k="audience" data-setup><option>All of sales</option><option>BDRs and SDRs</option><option>Account Executives</option><option>Sales leaders</option></select><span class="tipbox" role="tooltip" id="h-audience">Who reads this email. Claude adjusts the detail for them.</span></div>
+    <div><label for="tone">Tone<button type="button" class="tip" aria-label="What is this?" aria-describedby="h-tone" aria-expanded="false">i</button></label><select id="tone" aria-describedby="h-tone" data-k="tone" data-setup><option>Direct and energizing</option><option>Warm and consultative</option><option>Executive and concise</option></select><span class="tipbox" role="tooltip" id="h-tone">How the email should sound to reps.</span></div>
+    <div><label for="sendMode">Send mode<button type="button" class="tip" aria-label="What is this?" aria-describedby="h-sendMode" aria-expanded="false">i</button></label><select id="sendMode" aria-describedby="h-sendMode" data-k="sendMode" data-setup><option value="draft">Draft only (recommended to start)</option><option value="approve-to-send">Approve, then send</option><option value="auto">Auto-send on scheduled runs</option></select><span class="tipbox" role="tooltip" id="h-sendMode">Draft only: Claude saves a draft for you to review. Approve, then send: Claude asks you first. Auto-send: sends on the weekly schedule only if every number checks out.</span></div>
+    <div class="full"><label for="subtitle">Subtitle<button type="button" class="tip" aria-label="What is this?" aria-describedby="h-subtitle" aria-expanded="false">i</button></label><input id="subtitle" aria-describedby="h-subtitle" data-k="subtitle" data-setup value="Weekly intel from marketing to help you win."><span class="tipbox" role="tooltip" id="h-subtitle">The line under the Air Cover title. Change it anytime.</span></div>
+    <div><label for="assetLib">Asset library <span class="opt">(optional)</span><button type="button" class="tip" aria-label="What is this?" aria-describedby="h-assetLib" aria-expanded="false">i</button></label><input id="assetLib" aria-describedby="h-assetLib" data-k="assetLib" data-setup type="url" placeholder="https://"><span class="tipbox" role="tooltip" id="h-assetLib">Where reps find marketing content, like a Drive or SharePoint folder. Shown in the email footer.</span></div>
+    <div><label for="requestLink">Request link <span class="opt">(optional)</span><button type="button" class="tip" aria-label="What is this?" aria-describedby="h-requestLink" aria-expanded="false">i</button></label><input id="requestLink" aria-describedby="h-requestLink" data-k="requestLink" data-setup type="url" placeholder="https://"><span class="tipbox" role="tooltip" id="h-requestLink">Where sales asks marketing for help, like a form or Slack channel. Shown in the email footer.</span></div>
+  </div>
+  <p class="hint">Section 1, The Quick Read, has no fields. Claude writes it last, from everything below.</p>
+</section>
+
+<section class="card" id="pipeline" aria-labelledby="pipe-h">
+  <header><span class="num" aria-hidden="true">2</span><div><h2 id="pipe-h">Pipeline Pulse</h2><p>Marketing’s contribution and where it’s trending. Leave blank and Claude pulls it from your CRM, if connected.</p></div></header>
+  <div class="grid">
+    <div><label for="pSourced">Marketing-sourced pipeline<button type="button" class="tip" aria-label="What is this?" aria-describedby="h-pSourced" aria-expanded="false">i</button></label><input id="pSourced" aria-describedby="h-pSourced" data-k="pSourced" placeholder="$2.4M"><span class="tipbox" role="tooltip" id="h-pSourced">Pipeline from deals that started with a marketing lead this quarter. Find it in your CRM.</span></div>
+    <div><label for="pTarget">Quarter target<button type="button" class="tip" aria-label="What is this?" aria-describedby="h-pTarget" aria-expanded="false">i</button></label><input id="pTarget" aria-describedby="h-pTarget" data-k="pTarget" placeholder="$3.5M"><span class="tipbox" role="tooltip" id="h-pTarget">Marketing’s pipeline goal for the quarter. Claude shows how close you are.</span></div>
+    <div><label for="pInfluenced">Influenced pipeline <span class="opt">(optional)</span><button type="button" class="tip" aria-label="What is this?" aria-describedby="h-pInfluenced" aria-expanded="false">i</button></label><input id="pInfluenced" aria-describedby="h-pInfluenced" data-k="pInfluenced" placeholder="$6.1M"><span class="tipbox" role="tooltip" id="h-pInfluenced">Pipeline marketing touched (events, content, ads), even if sales started the deal.</span></div>
+    <div><label for="mqlThis">MQLs this week<button type="button" class="tip" aria-label="What is this?" aria-describedby="h-mqlThis" aria-expanded="false">i</button></label><input id="mqlThis" aria-describedby="h-mqlThis" data-k="mqlThis" inputmode="numeric"><span class="tipbox" role="tooltip" id="h-mqlThis">Marketing-qualified leads: people interested enough to pass to sales.</span></div>
+    <div><label for="mqlLast">MQLs last week<button type="button" class="tip" aria-label="What is this?" aria-describedby="h-mqlLast" aria-expanded="false">i</button></label><input id="mqlLast" aria-describedby="h-mqlLast" data-k="mqlLast" inputmode="numeric"><span class="tipbox" role="tooltip" id="h-mqlLast">Last week’s count, so Claude can show the trend.</span></div>
+    <div><label for="sqlThis">SQLs this week<button type="button" class="tip" aria-label="What is this?" aria-describedby="h-sqlThis" aria-expanded="false">i</button></label><input id="sqlThis" aria-describedby="h-sqlThis" data-k="sqlThis" inputmode="numeric"><span class="tipbox" role="tooltip" id="h-sqlThis">Sales-qualified leads: leads sales accepted as real opportunities.</span></div>
+    <div><label for="sqlLast">SQLs last week<button type="button" class="tip" aria-label="What is this?" aria-describedby="h-sqlLast" aria-expanded="false">i</button></label><input id="sqlLast" aria-describedby="h-sqlLast" data-k="sqlLast" inputmode="numeric"><span class="tipbox" role="tooltip" id="h-sqlLast">Last week’s count, so Claude can show the trend.</span></div>
+    <div class="full"><label for="pNote">The “so what” <span class="opt">(optional)</span><button type="button" class="tip" aria-label="What is this?" aria-describedby="h-pNote" aria-expanded="false">i</button></label><input id="pNote" aria-describedby="h-pNote" data-k="pNote" placeholder="Webinar drove most of this week’s SQLs"><span class="tipbox" role="tooltip" id="h-pNote">One line on why the numbers moved. Leave it blank and Claude writes it.</span></div>
+  </div>
+</section>
+
+<section class="card" id="accounts" aria-labelledby="acc-h">
+  <header><span class="num" aria-hidden="true">3</span><div><h2 id="acc-h">Accounts to Work This Week</h2><p>Who to call and why now. Claude writes what to say to each one. Up to 10.</p></div></header>
+  <p class="legend"><b>Account:</b> the company. <b>Signal:</b> why they’re worth a call now. <b>Owner or territory:</b> which rep or region should call. <b>Detail:</b> anything specific, like pages they visited.</p>
+  <div id="accRows"></div>
+  <button class="btn btn-ghost add" type="button" id="addAcc">Add account</button>
+</section>
+
+<section class="card" id="speed" aria-labelledby="spd-h">
+  <header><span class="num" aria-hidden="true">4</span><div><h2 id="spd-h">Speed-to-Lead</h2><p>Keeps inbound from going cold. Claude keeps the tone encouraging, never scolding.</p></div></header>
+  <div class="grid">
+    <div><label for="avgResp">Average first response<button type="button" class="tip" aria-label="What is this?" aria-describedby="h-avgResp" aria-expanded="false">i</button></label><input id="avgResp" aria-describedby="h-avgResp" data-k="avgResp" placeholder="9 hours"><span class="tipbox" role="tooltip" id="h-avgResp">How long sales takes, on average, to first contact a new inbound lead.</span></div>
+    <div><label for="untouched">MQLs untouched after 48 hours<button type="button" class="tip" aria-label="What is this?" aria-describedby="h-untouched" aria-expanded="false">i</button></label><input id="untouched" aria-describedby="h-untouched" data-k="untouched" placeholder="14%"><span class="tipbox" role="tooltip" id="h-untouched">Share of new leads that nobody has contacted after two days.</span></div>
+    <div><label for="spdGoal">Goal for next week<button type="button" class="tip" aria-label="What is this?" aria-describedby="h-spdGoal" aria-expanded="false">i</button></label><input id="spdGoal" aria-describedby="h-spdGoal" data-k="spdGoal" placeholder="Under 1 hour"><span class="tipbox" role="tooltip" id="h-spdGoal">The response time to aim for next week.</span></div>
+  </div>
+</section>
+
+<section class="card" id="launching" aria-labelledby="lau-h">
+  <header><span class="num" aria-hidden="true">5</span><div><h2 id="lau-h">What’s Launching</h2><p>Campaigns, events and content going live. Claude writes one line on how to bring each one up. Up to 5.</p></div></header>
+  <p class="legend"><b>Name and type:</b> what’s going live. <b>Launch date:</b> when prospects will see it. <b>Who it targets:</b> the audience, like IT leaders. <b>Asset link:</b> where reps can open or share it.</p>
+  <div id="lauRows"></div>
+  <button class="btn btn-ghost add" type="button" id="addLau">Add launch</button>
+</section>
+
+<section class="card" id="play" aria-labelledby="play-h">
+  <header><span class="num" aria-hidden="true">6</span><div><h2 id="play-h">Try This Week</h2><p>One ready-to-send message reps can use today. Claude writes it for you.</p></div></header>
+  <div class="grid">
+    <div><label for="playType">Message type<button type="button" class="tip" aria-label="What is this?" aria-describedby="h-playType" aria-expanded="false">i</button></label><select id="playType" aria-describedby="h-playType" data-k="playType"><option value="">Choose one</option><option>Email</option><option>Call script</option><option>LinkedIn message</option><option>Follow-up</option><option>Voicemail</option></select><span class="tipbox" role="tooltip" id="h-playType">The kind of message Claude writes for reps to copy and send.</span></div>
+    <div><label for="playTopic">Topic<button type="button" class="tip" aria-label="What is this?" aria-describedby="h-playTopic" aria-expanded="false">i</button></label><input id="playTopic" aria-describedby="h-playTopic" data-k="playTopic" placeholder="Following up with webinar attendees"><span class="tipbox" role="tooltip" id="h-playTopic">The situation it’s for, like following up after a webinar.</span></div>
+    <div><label for="playTie">Ties to campaign <span class="opt">(optional)</span><button type="button" class="tip" aria-label="What is this?" aria-describedby="h-playTie" aria-expanded="false">i</button></label><input id="playTie" aria-describedby="h-playTie" data-k="playTie"><span class="tipbox" role="tooltip" id="h-playTie">The campaign this message supports, if any.</span></div>
+  </div>
+</section>
+
+<section class="card" id="spotlight" aria-labelledby="spot-h">
+  <header><span class="num" aria-hidden="true">7</span><div><h2 id="spot-h">Spotlight</h2><p>Pick one per week and rotate.</p></div></header>
+  <div class="grid">
+    <div><label for="spotType">Spotlight<button type="button" class="tip" aria-label="What is this?" aria-describedby="h-spotType" aria-expanded="false">i</button></label><select id="spotType" aria-describedby="h-spotType" data-k="spotType"><option value="">Choose one</option><option>Win Story</option><option>Competitive Quick Take</option><option>Voice of the Customer</option><option>Content Spotlight</option></select><span class="tipbox" role="tooltip" id="h-spotType">Pick one feature each week and rotate. Each choice shows its own fields.</span></div>
+  </div>
+  <div class="grid" id="spotFields" style="margin-top:14px"></div>
+</section>
+
+<section class="card" id="wrapup" aria-labelledby="wrap-h">
+  <header><span class="num" aria-hidden="true">8</span><div><h2 id="wrap-h">Wrap Up</h2><p>A short story of the week, then one question back to sales.</p></div></header>
+  <div class="grid">
+    <div class="full"><label for="wrapStory">Story of the week <span class="opt">(optional, Claude can write it)</span><button type="button" class="tip" aria-label="What is this?" aria-describedby="h-wrapStory" aria-expanded="false">i</button></label><textarea id="wrapStory" aria-describedby="h-wrapStory" data-k="wrapStory"></textarea><span class="tipbox" role="tooltip" id="h-wrapStory">A sentence or two on the week’s big story. Leave it blank and Claude writes it.</span></div>
+    <div class="full"><label for="closingQ">Closing question<button type="button" class="tip" aria-label="What is this?" aria-describedby="h-closingQ" aria-expanded="false">i</button></label><select id="closingQ" aria-describedby="h-closingQ" data-k="closingQ">
+      <option>What’s the one thing marketing could do next week to help you close faster?</option>
+      <option>What objection did you hear most this week?</option>
+      <option>Which account do you wish you had more intel on?</option>
+      <option>What content do you wish existed?</option>
+      <option>Which campaign is showing up in your conversations?</option>
+      <option value="custom">Write my own</option></select><span class="tipbox" role="tooltip" id="h-closingQ">One question that gets reps talking. They answer by replying to the email.</span></div>
+    <div class="full" id="customQWrap" hidden><label for="customQ">Your question<button type="button" class="tip" aria-label="What is this?" aria-describedby="h-customQ" aria-expanded="false">i</button></label><input id="customQ" aria-describedby="h-customQ" data-k="customQ"><span class="tipbox" role="tooltip" id="h-customQ">Your own question for reps to answer.</span></div>
+  </div>
+</section>
+
+<section class="card" id="build" aria-labelledby="build-h">
+  <header><span class="num" aria-hidden="true">✈</span><div><h2 id="build-h">Build Air Cover</h2><p>Copy the brief into your Air Cover/OS Claude Project. Claude fills the gaps from your connectors, writes the email and follows your send mode.</p></div></header>
+  <div class="build">
+    <div class="panel"><h3>Brief for Claude <span class="auto">/aircover</span></h3><pre id="brief" tabindex="0" aria-label="Brief for Claude"></pre></div>
+    <div class="panel"><h3>Email preview <span class="auto">Claude fills the highlights</span></h3><div class="mail"><div class="mail-in" id="preview"></div></div></div>
+  </div>
+  <div class="actions">
+    <button class="btn btn-amber" type="button" id="copyBtn">Copy brief</button>
+    <a class="btn btn-navy" href="https://claude.ai/new" target="_blank" rel="noopener">Open Claude ↗</a>
+    <button class="btn btn-ghost" type="button" id="mdBtn">Export brief .md</button>
+    <button class="btn btn-ghost" type="button" id="resetBtn">Start next week</button>
+  </div>
+  <p class="status" id="status" role="status"></p>
+</section>
+
+<div class="foot"><span>Air Cover/OS by Barbara Basquill. Drafts first: nothing sends until your send mode allows it.</span><span>© 2026 Barbara Basquill. All rights reserved.</span></div>
+</main>
+</div>
+
+<script>
+(function(){
+const KEY='air-cover-os-v1';
+const SIGNALS=['Intent surge','Pricing-page visit','Webinar attendee','Content download','Recent funding','New executive','Hiring for the pain','Evaluating a competitor'];
+const LTYPES=['Webinar','Campaign','eBook or guide','Case study','Event','Product launch','Email nurture'];
+const SPOT={
+ 'Win Story':[['spDeal','Deal or account','The customer or deal. Only use names marketing is approved to share.'],['spSeg','Segment or industry','Their industry or size, like midmarket healthcare.'],['spTouch','What marketing touched','Campaigns, events or content they engaged with.'],['spWorked','What worked','What made the difference, in a sentence.']],
+ 'Competitive Quick Take':[['spComp','Competitor','The competitor’s name.'],['spMove','Their move this week','What they did, like a price change or a launch.'],['spResp','How to respond','What reps should say if a prospect brings it up.']],
+ 'Voice of the Customer':[['spTheme','Top objection or theme','The concern or topic coming up most on calls.'],['spAnswer','Best answer reps are using','The response that’s working best.']],
+ 'Content Spotlight':[['spAsset','Asset','The piece of content to feature.'],['spLink','Link','Where reps can open or share it.'],['spWhy','Why it works and when to send it','The moment in a deal when this helps most.']]
+};
+let S={accounts:[],launches:[]};
+try{const raw=localStorage.getItem(KEY);if(raw)S=Object.assign(S,JSON.parse(raw));}catch(e){}
+const $=id=>document.getElementById(id);
+const save=()=>{try{localStorage.setItem(KEY,JSON.stringify(S));}catch(e){}};
+const esc=s=>String(s??'').replace(/[&<>"]/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;'}[c]));
+
+function nextMonday(){const d=new Date();const add=(8-d.getDay())%7||7;d.setDate(d.getDate()+(d.getDay()===1?0:add));return d.toLocaleDateString('en-US',{month:'short',day:'numeric'});}
+if(!S.weekOf)S.weekOf=nextMonday();
+
+function bindFields(root=document){
+  root.querySelectorAll('[data-k]').forEach(el=>{
+    const k=el.dataset.k;
+    if(S[k]!==undefined&&S[k]!=='')el.value=S[k];else if(el.value)S[k]=el.value;
+    if(el.dataset.bound)return;el.dataset.bound=1;
+    el.addEventListener('input',()=>{S[k]=el.value;if(k==='spotType')renderSpot();if(k==='closingQ')toggleQ();update();});
+  });
+}
+function opts(list,sel){return '<option value="">Choose</option>'+list.map(o=>`<option${o===sel?' selected':''}>${o}</option>`).join('');}
+
+function renderAcc(){
+  const box=$('accRows');
+  if(!S.accounts.length){box.innerHTML='<p class="empty">No accounts yet. Add the ones showing a signal this week.</p>';}
+  else box.innerHTML=S.accounts.map((a,i)=>`<div class="row">
+   <div><label for="an${i}">Account</label><input id="an${i}" data-i="${i}" data-f="name" value="${esc(a.name)}"></div>
+   <div><label for="as${i}">Signal</label><select id="as${i}" data-i="${i}" data-f="signal">${opts(SIGNALS,a.signal)}</select></div>
+   <div><label for="ao${i}">Owner or territory</label><input id="ao${i}" data-i="${i}" data-f="owner" value="${esc(a.owner)}"></div>
+   <div><label for="ad${i}">Detail <span class="opt">(optional)</span></label><input id="ad${i}" data-i="${i}" data-f="detail" value="${esc(a.detail)}" placeholder="Visited pricing 3 times"></div>
+   <button class="x" type="button" data-del="${i}" aria-label="Remove account ${i+1}">×</button></div>`).join('');
+  box.querySelectorAll('[data-f]').forEach(el=>el.addEventListener('input',()=>{S.accounts[el.dataset.i][el.dataset.f]=el.value;update();}));
+  box.querySelectorAll('[data-del]').forEach(b=>b.addEventListener('click',()=>{S.accounts.splice(b.dataset.del,1);renderAcc();update();}));
+  $('addAcc').disabled=S.accounts.length>=10;
+}
+function renderLau(){
+  const box=$('lauRows');
+  if(!S.launches.length){box.innerHTML='<p class="empty">Nothing launching yet. Add campaigns, events or content going live.</p>';}
+  else box.innerHTML=S.launches.map((l,i)=>`<div class="row launch">
+   <div><label for="ln${i}">Name</label><input id="ln${i}" data-i="${i}" data-f="name" value="${esc(l.name)}"></div>
+   <div><label for="lt${i}">Type</label><select id="lt${i}" data-i="${i}" data-f="type">${opts(LTYPES,l.type)}</select></div>
+   <div><label for="ld${i}">Launch date</label><input id="ld${i}" data-i="${i}" data-f="date" value="${esc(l.date)}" placeholder="Oct 29"></div>
+   <div><label for="la${i}">Who it targets</label><input id="la${i}" data-i="${i}" data-f="aud" value="${esc(l.aud)}"></div>
+   <div><label for="ll${i}">Asset link</label><input id="ll${i}" type="url" data-i="${i}" data-f="link" value="${esc(l.link)}" placeholder="https://"></div>
+   <button class="x" type="button" data-del="${i}" aria-label="Remove launch ${i+1}">×</button></div>`).join('');
+  box.querySelectorAll('[data-f]').forEach(el=>el.addEventListener('input',()=>{S.launches[el.dataset.i][el.dataset.f]=el.value;update();}));
+  box.querySelectorAll('[data-del]').forEach(b=>b.addEventListener('click',()=>{S.launches.splice(b.dataset.del,1);renderLau();update();}));
+  $('addLau').disabled=S.launches.length>=5;
+}
+function renderSpot(){
+  const f=SPOT[S.spotType]||[];
+  $('spotFields').innerHTML=f.map(([k,l,t])=>`<div${k==='spWorked'||k==='spResp'||k==='spWhy'||k==='spAnswer'?' class="full"':''}><label for="${k}">${l}<button type="button" class="tip" aria-label="What is this?" aria-describedby="h-${k}" aria-expanded="false">i</button></label><input id="${k}" data-k="${k}" aria-describedby="h-${k}"><span class="tipbox" role="tooltip" id="h-${k}">${t}</span></div>`).join('');
+  bindFields($('spotFields'));
+}
+function toggleQ(){$('customQWrap').hidden=S.closingQ!=='custom';}
+$('addAcc').onclick=()=>{S.accounts.push({});renderAcc();update();const i=S.accounts.length-1;$('an'+i)?.focus();};
+$('addLau').onclick=()=>{S.launches.push({});renderLau();update();const i=S.launches.length-1;$('ln'+i)?.focus();};
+
+const has=(...k)=>k.some(x=>S[x]&&String(S[x]).trim());
+function sections(){
+  const acc=S.accounts.filter(a=>a.name),lau=S.launches.filter(l=>l.name);
+  return {pipeline:has('pSourced','pTarget','pInfluenced','mqlThis','sqlThis','pNote'),accounts:acc.length>0,speed:has('avgResp','untouched','spdGoal'),
+   launching:lau.length>0,play:has('playType','playTopic'),spotlight:!!S.spotType,wrapup:true,acc,lau};
+}
+function question(){return S.closingQ==='custom'?(S.customQ||''):(S.closingQ||$('closingQ').value);}
+
+function buildBrief(){
+  const x=sections(),L=[];
+  L.push('/aircover Build this week’s Air Cover email.','');
+  L.push(`Subject: Air Cover | Week of ${S.weekOf||''}`,`Subtitle: ${S.subtitle||''}`);
+  L.push(`From: ${S.senderName||'[sender]'}${S.senderRole?', '+S.senderRole:''}${S.company?' at '+S.company:''}`);
+  if(S.product)L.push(`Product: ${S.product}`);
+  L.push(`Audience: ${S.audience||'All of sales'} | Tone: ${S.tone||'Direct and energizing'} | Send mode: ${S.sendMode||'draft'}`,'');
+  L.push('Use air-cover-context.md, section-guide.md and email-template.html. Write the The Quick Read last. Drop any section with no real content. Never invent numbers, accounts or quotes; name the source of every metric. Apply the four AI UX rules: usability, accessibility, reliability, pleasantness.','');
+  if(x.pipeline){L.push('## Pipeline Pulse');
+    [['Marketing-sourced pipeline','pSourced'],['Quarter target','pTarget'],['Influenced pipeline','pInfluenced'],['MQLs this week','mqlThis'],['MQLs last week','mqlLast'],['SQLs this week','sqlThis'],['SQLs last week','sqlLast'],['So what','pNote']].forEach(([l,k])=>S[k]&&L.push(`- ${l}: ${S[k]}`));L.push('');}
+  else L.push('## Pipeline Pulse','- No inputs. Pull from the CRM if connected; otherwise drop this section.','');
+  if(x.accounts){L.push('## Accounts to Work This Week (write one line of what to say for each)');x.acc.forEach(a=>L.push(`- ${a.name} | Signal: ${a.signal||'unspecified'} | Owner: ${a.owner||'unassigned'}${a.detail?' | '+a.detail:''}`));L.push('');}
+  if(x.speed){L.push('## Speed-to-Lead (encouraging, never scolding)');[['Average first response','avgResp'],['Untouched after 48 hours','untouched'],['Goal for next week','spdGoal']].forEach(([l,k])=>S[k]&&L.push(`- ${l}: ${S[k]}`));L.push('');}
+  if(x.launching){L.push('## What’s Launching (write one line on how to bring each up)');x.lau.forEach(l=>L.push(`- ${l.name} | ${l.type||'Launch'} | ${l.date||'date TBC'} | For: ${l.aud||'all accounts'}${l.link?' | '+l.link:''}`));L.push('');}
+  if(x.play){L.push('## Try This Week (write a ready-to-send message under 90 words)');S.playType&&L.push(`- Type: ${S.playType}`);S.playTopic&&L.push(`- Topic: ${S.playTopic}`);S.playTie&&L.push(`- Ties to: ${S.playTie}`);L.push('');}
+  if(x.spotlight){L.push(`## Spotlight: ${S.spotType}`);(SPOT[S.spotType]||[]).forEach(([k,l])=>S[k]&&L.push(`- ${l}: ${S[k]}`));L.push('');}
+  L.push('## Wrap Up');L.push(S.wrapStory?`- Story: ${S.wrapStory}`:'- Story: write 3–4 sentences from this week’s sections.');L.push(`- Closing question: ${question()||'[choose a question]'}`,'- End with: I read every reply.','');
+  L.push('## Footer');S.assetLib&&L.push(`- Asset library: ${S.assetLib}`);S.requestLink&&L.push(`- Request a campaign: ${S.requestLink}`);L.push('- Add “Data as of [date]. Sources: [list].”');
+  return L.join('\n');
+}
+function ph(t){return `<span class="ph">${esc(t)}</span>`;}
+function buildPreview(){
+  const x=sections(),names=['The Quick Read'];let n=1,h='';
+  const add=(t,body)=>{n++;names.push(t);h+=`<div class="mail-sec"><h4>${n}. ${esc(t)}</h4>${body}</div>`;};
+  if(x.pipeline)add('Pipeline Pulse',`<p>${S.pSourced?`Sourced: <b>${esc(S.pSourced)}</b>`:''}${S.pTarget?` of ${esc(S.pTarget)} target`:''}${S.mqlThis?` · MQLs ${esc(S.mqlThis)}`:''}${S.sqlThis?` · SQLs ${esc(S.sqlThis)}`:''}</p><p>${S.pNote?esc(S.pNote):ph('Claude writes the so what')}</p>`);
+  if(x.accounts)add('Accounts to Work This Week',x.acc.map(a=>`<p><b>${esc(a.name)}</b> (${esc(a.owner||'owner')})<br>Signal: ${esc(a.signal||'—')}<br>${ph('What to say')}</p>`).join(''));
+  if(x.speed)add('Speed-to-Lead',`<p>Avg response <b>${esc(S.avgResp||'—')}</b> · Untouched 48h <b>${esc(S.untouched||'—')}</b> · Goal <b>${esc(S.spdGoal||'—')}</b></p><p>${ph('Encouraging nudge')}</p>`);
+  if(x.launching)add('What’s Launching',x.lau.map(l=>`<p><b>${esc(l.name)}</b>, ${esc(l.date||'date TBC')}<br>${ph('How to bring it up')}</p>`).join(''));
+  if(x.play)add(`Try This Week${S.playTopic?': '+S.playTopic:''}`,`<p>${ph((S.playType||'Message')+', ready to send')}</p>`);
+  if(x.spotlight)add(`Spotlight: ${S.spotType}`,`<p>${ph('Under 120 words')}</p>`);
+  add('Wrap Up',`<p>${S.wrapStory?esc(S.wrapStory):ph('Story of the week')}</p><p class="mail-q">${esc(question())} Hit reply. I read every reply.</p>`);
+  return `<div class="mail-head"><p class="w">Week of ${esc(S.weekOf)}</p><p class="t">Air Cover</p><p class="s">${esc(S.subtitle||'')}</p><p class="c">In this issue: ${names.map((t,i)=>`${i+1}. ${esc(t)}`).join(' · ')}</p></div>
+  <div class="mail-sec"><h4>1. The Quick Read</h4><p>${ph('What moved · What’s hot · Do this week')}</p></div>${h}
+  <div class="mail-foot">${esc(S.senderName||'Your name')}${S.senderRole?', '+esc(S.senderRole):''}<br>Data as of ${ph('date')}. Sources: ${ph('list')}.</div>`;
+}
+function update(){
+  const x=sections();
+  $('sCount').textContent=['pipeline','accounts','speed','launching','play','spotlight','wrapup'].filter(k=>x[k]).length;
+  $('aCount').textContent=x.acc.length;$('lCount').textContent=x.lau.length;$('heroWeek').textContent=S.weekOf||'—';
+  $('brief').textContent=buildBrief();$('preview').innerHTML=buildPreview();save();
+}
+function flash(m){$('status').textContent=m;setTimeout(()=>$('status').textContent='',3500);}
+$('copyBtn').onclick=async()=>{try{await navigator.clipboard.writeText(buildBrief());flash('Brief copied. Paste it into your Air Cover/OS Project in Claude.');}catch(e){flash('Copy didn’t work here. Select the brief text and copy it manually.');}};
+$('mdBtn').onclick=()=>{const b=new Blob([buildBrief()],{type:'text/markdown'});const a=document.createElement('a');a.href=URL.createObjectURL(b);a.download=`air-cover-week-of-${(S.weekOf||'').replace(/\s+/g,'-').toLowerCase()}.md`;a.click();URL.revokeObjectURL(a.href);flash('Brief exported.');};
+$('resetBtn').onclick=()=>{if(!confirm('Clear this week’s sections and start next week? Your setup stays.'))return;
+  const keep={};document.querySelectorAll('[data-setup]').forEach(el=>keep[el.dataset.k]=S[el.dataset.k]);
+  S=Object.assign({accounts:[],launches:[]},keep);S.weekOf=nextMonday();
+  document.querySelectorAll('[data-k]:not([data-setup])').forEach(el=>{if(el.tagName==='SELECT')el.selectedIndex=0;else el.value='';});
+  $('weekOf').value=S.weekOf;renderAcc();renderLau();renderSpot();toggleQ();update();flash('Ready for next week.');};
+
+// nav highlight
+const links=[...document.querySelectorAll('#nav a')];
+const io=new IntersectionObserver(es=>es.forEach(e=>{if(e.isIntersecting)links.forEach(a=>a.classList.toggle('on',a.getAttribute('href')==='#'+e.target.id));}),{rootMargin:'-40% 0px -55% 0px'});
+document.querySelectorAll('main > section').forEach(s=>io.observe(s));
+
+document.addEventListener('click',e=>{const t=e.target.closest('.tip');
+  document.querySelectorAll('.tip[aria-expanded="true"]').forEach(b=>{if(b!==t)b.setAttribute('aria-expanded','false');});
+  if(t){e.preventDefault();t.setAttribute('aria-expanded',t.getAttribute('aria-expanded')==='true'?'false':'true');}});
+document.addEventListener('keydown',e=>{if(e.key==='Escape')document.querySelectorAll('.tip[aria-expanded="true"]').forEach(b=>b.setAttribute('aria-expanded','false'));});
+bindFields();renderAcc();renderLau();renderSpot();toggleQ();update();
+})();
+</script>
+</body>
+</html>
