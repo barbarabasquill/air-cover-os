@@ -1,0 +1,123 @@
+<!DOCTYPE html>
+<!--
+  Air Cover email template. Email-safe: tables, inline styles, no scripts.
+  Claude replaces every {{PLACEHOLDER}} and deletes any section block
+  (between its BEGIN and END comments) that has no real content.
+  Repeat the marked rows for each account, launch or stat.
+-->
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Air Cover | Week of {{WEEK}}</title>
+</head>
+<body style="margin:0;padding:0;background:#eef1f7;">
+<div style="display:none;max-height:0;overflow:hidden;">{{PREHEADER_TLDR_LINE_1}}</div>
+<table role="presentation" width="100%" cellpadding="0" cellspacing="0" style="background:#eef1f7;">
+<tr><td align="center" style="padding:24px 12px;">
+<table role="presentation" width="640" cellpadding="0" cellspacing="0" style="max-width:640px;width:100%;background:#ffffff;border-radius:10px;overflow:hidden;font-family:Arial,Helvetica,sans-serif;color:#1a2238;">
+
+<!-- BEGIN HEADER -->
+<tr><td style="background:#0b1430;padding:28px 32px;">
+  <p style="margin:0;font-size:13px;color:#9fb3e0;">Week of {{WEEK}}</p>
+  <h1 style="margin:6px 0 4px;font-size:32px;line-height:1.1;color:#ffffff;">Air Cover</h1>
+  <p style="margin:0;font-size:16px;color:#ffc65c;">Weekly intel from marketing to help you win.</p>
+  <p style="margin:16px 0 0;font-size:13px;line-height:1.5;color:#c9d4ee;">In this issue: {{CONTENTS_LINE}}</p>
+</td></tr>
+<!-- END HEADER -->
+
+<!-- BEGIN TLDR -->
+<tr><td style="padding:24px 32px 8px;">
+  <h2 style="margin:0 0 10px;font-size:18px;color:#0b1430;">1. TL;DR</h2>
+  <p style="margin:0 0 6px;font-size:15px;line-height:1.5;"><strong>What moved:</strong> {{TLDR_MOVED}}</p>
+  <p style="margin:0 0 6px;font-size:15px;line-height:1.5;"><strong>What's hot:</strong> {{TLDR_HOT}}</p>
+  <p style="margin:0;font-size:15px;line-height:1.5;"><strong>Do this week:</strong> {{TLDR_DO}}</p>
+</td></tr>
+<!-- END TLDR -->
+
+<!-- BEGIN PIPELINE -->
+<tr><td style="padding:20px 32px 8px;">
+  <h2 style="margin:0 0 12px;font-size:18px;color:#0b1430;">{{N}}. Pipeline Pulse</h2>
+  <table role="presentation" width="100%" cellpadding="0" cellspacing="0"><tr>
+    <!-- REPEAT STAT (up to 4) -->
+    <td style="padding:12px;background:#f3f6fc;border-radius:8px;" width="25%">
+      <p style="margin:0;font-size:22px;font-weight:bold;color:#0b1430;">{{STAT_VALUE}}</p>
+      <p style="margin:2px 0 0;font-size:12px;color:#4a5677;">{{STAT_LABEL}}</p>
+    </td>
+    <!-- END REPEAT -->
+  </tr></table>
+  <p style="margin:12px 0 0;font-size:15px;line-height:1.5;">{{PIPELINE_SO_WHAT}}</p>
+</td></tr>
+<!-- END PIPELINE -->
+
+<!-- BEGIN ACCOUNTS -->
+<tr><td style="padding:20px 32px 8px;">
+  <h2 style="margin:0 0 12px;font-size:18px;color:#0b1430;">{{N}}. Accounts to Work This Week</h2>
+  <table role="presentation" width="100%" cellpadding="0" cellspacing="0" style="font-size:14px;line-height:1.45;">
+    <!-- REPEAT ACCOUNT (up to 10) -->
+    <tr><td style="padding:10px 0;border-bottom:1px solid #e3e8f2;">
+      <strong>{{ACCOUNT}}</strong> <span style="color:#4a5677;">({{OWNER}})</span><br>
+      <span style="color:#a05a00;">Signal: {{SIGNAL}}</span><br>
+      Opener: "{{OPENER}}"
+    </td></tr>
+    <!-- END REPEAT -->
+  </table>
+</td></tr>
+<!-- END ACCOUNTS -->
+
+<!-- BEGIN SPEED -->
+<tr><td style="padding:20px 32px 8px;">
+  <h2 style="margin:0 0 10px;font-size:18px;color:#0b1430;">{{N}}. Speed-to-Lead</h2>
+  <p style="margin:0;font-size:15px;line-height:1.5;">Average first response: <strong>{{AVG_RESPONSE}}</strong>. Untouched after 48 hours: <strong>{{UNTOUCHED}}</strong>. Next week's goal: <strong>{{GOAL}}</strong>.</p>
+  <p style="margin:8px 0 0;font-size:15px;line-height:1.5;">{{SPEED_NUDGE}}</p>
+</td></tr>
+<!-- END SPEED -->
+
+<!-- BEGIN LAUNCHING -->
+<tr><td style="padding:20px 32px 8px;">
+  <h2 style="margin:0 0 12px;font-size:18px;color:#0b1430;">{{N}}. What's Launching</h2>
+  <!-- REPEAT LAUNCH (up to 5) -->
+  <p style="margin:0 0 12px;font-size:14px;line-height:1.5;"><strong>{{LAUNCH_NAME}}</strong>, {{LAUNCH_DATE}}, for {{LAUNCH_AUDIENCE}}<br>
+  Talk track: {{TALK_TRACK}}<br>
+  <a href="{{ASSET_URL}}" style="color:#1d4ed8;">Open the {{LAUNCH_TYPE}}</a></p>
+  <!-- END REPEAT -->
+</td></tr>
+<!-- END LAUNCHING -->
+
+<!-- BEGIN PLAY -->
+<tr><td style="padding:20px 32px 8px;">
+  <h2 style="margin:0 0 10px;font-size:18px;color:#0b1430;">{{N}}. Play of the Week: {{PLAY_TITLE}}</h2>
+  <p style="margin:0 0 10px;font-size:15px;line-height:1.5;">{{PLAY_WHEN_TO_USE}}</p>
+  <div style="background:#f3f6fc;border-left:4px solid #ffb21c;padding:12px 14px;font-size:14px;line-height:1.55;">{{PLAY_COPY}}</div>
+</td></tr>
+<!-- END PLAY -->
+
+<!-- BEGIN SPOTLIGHT -->
+<tr><td style="padding:20px 32px 8px;">
+  <h2 style="margin:0 0 10px;font-size:18px;color:#0b1430;">{{N}}. Spotlight: {{SPOTLIGHT_TYPE}}</h2>
+  <p style="margin:0;font-size:15px;line-height:1.5;">{{SPOTLIGHT_BODY}}</p>
+</td></tr>
+<!-- END SPOTLIGHT -->
+
+<!-- BEGIN WRAPUP -->
+<tr><td style="padding:24px 32px;">
+  <h2 style="margin:0 0 10px;font-size:18px;color:#0b1430;">{{N}}. Wrap Up</h2>
+  <p style="margin:0 0 16px;font-size:15px;line-height:1.55;">{{WRAPUP_STORY}}</p>
+  <p style="margin:0;font-size:19px;line-height:1.4;font-family:Georgia,serif;color:#0b1430;">{{CLOSING_QUESTION}} Hit reply. I read every reply.</p>
+</td></tr>
+<!-- END WRAPUP -->
+
+<!-- BEGIN FOOTER -->
+<tr><td style="background:#f3f6fc;padding:18px 32px;font-size:12px;line-height:1.5;color:#4a5677;">
+  {{SENDER_NAME}}, {{SENDER_ROLE}}<br>
+  <a href="{{ASSET_LIBRARY_URL}}" style="color:#1d4ed8;">Sales asset library</a> &nbsp;|&nbsp;
+  <a href="{{REQUEST_URL}}" style="color:#1d4ed8;">Request a campaign or content</a><br>
+  Data as of {{DATA_AS_OF}}. Sources: {{SOURCES}}.
+</td></tr>
+<!-- END FOOTER -->
+
+</table>
+</td></tr>
+</table>
+</body>
+</html>
