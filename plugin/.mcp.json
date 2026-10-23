@@ -1,0 +1,8 @@
+{
+  "mcpServers": {
+    "clay": { "type": "http", "url": "https://api.clay.com/v3/mcp" },
+    "crunchbase": { "type": "http", "url": "https://mcp.crunchbase.com" },
+    "firecrawl": { "type": "http", "url": "https://mcp.firecrawl.dev/v2/mcp-search" },
+    "zapier": { "type": "http", "url": "https://mcp.zapier.com/api/v1/connect" }
+  }
+}
