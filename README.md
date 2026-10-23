@@ -13,12 +13,12 @@ Part of a portfolio of GTM agents: GTM/OS, ABM-ABX/OS, Sales Momentum/OS and Air
 
 | # | Section | What reps get |
 |---|---|---|
-| 1 | TL;DR | What moved, what's hot, what to do this week |
+| 1 | The Quick Read | What moved, what's hot, what to do this week |
 | 2 | Pipeline Pulse | Marketing-sourced pipeline vs. target, MQL and SQL trend |
 | 3 | Accounts to Work This Week | Accounts with a signal, plus a suggested opener |
 | 4 | Speed-to-Lead | Response time, untouched MQLs, next week's goal |
 | 5 | What's Launching | Campaigns and content going live, with talk tracks |
-| 6 | Play of the Week | One ready-to-use email, call opener or LinkedIn message |
+| 6 | Try This Week | One ready-to-use email, call opener or LinkedIn message |
 | 7 | Spotlight | Rotating: Win Story, Competitive Quick Take, Voice of the Customer, Content Spotlight |
 | 8 | Wrap Up | The week's story and one question back to sales |
 
